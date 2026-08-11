@@ -1,0 +1,11 @@
+/home/joe/recipes-api/Domain/bin/Debug/net9.0/Domain.deps.json
+/home/joe/recipes-api/Domain/bin/Debug/net9.0/Domain.dll
+/home/joe/recipes-api/Domain/bin/Debug/net9.0/Domain.pdb
+/home/joe/recipes-api/Domain/obj/Debug/net9.0/Domain.GeneratedMSBuildEditorConfig.editorconfig
+/home/joe/recipes-api/Domain/obj/Debug/net9.0/Domain.AssemblyInfoInputs.cache
+/home/joe/recipes-api/Domain/obj/Debug/net9.0/Domain.AssemblyInfo.cs
+/home/joe/recipes-api/Domain/obj/Debug/net9.0/Domain.csproj.CoreCompileInputs.cache
+/home/joe/recipes-api/Domain/obj/Debug/net9.0/Domain.dll
+/home/joe/recipes-api/Domain/obj/Debug/net9.0/refint/Domain.dll
+/home/joe/recipes-api/Domain/obj/Debug/net9.0/Domain.pdb
+/home/joe/recipes-api/Domain/obj/Debug/net9.0/ref/Domain.dll
