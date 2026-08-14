@@ -1,3 +1,5 @@
+using Domain.Entities.Enums;
+
 namespace Domain.Entities
 {
     public class IngredientMeasurement

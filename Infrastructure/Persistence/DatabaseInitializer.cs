@@ -26,9 +26,6 @@ namespace Infrastructure.Persistence
                 cancellationToken
             );
 
-            // TODO: check whether tables already exist (e.g. query INFORMATION_SCHEMA.TABLES)
-            //       and return early if they do.
-
             // TODO: locate the .sql files under Persistence/Migrations, read each one,
             //       and execute in filename order:
             //

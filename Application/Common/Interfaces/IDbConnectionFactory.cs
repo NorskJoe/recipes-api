@@ -1,3 +1,5 @@
+using System.Data;
+
 namespace Application.Common.Interfaces
 {
     /// <summary>
