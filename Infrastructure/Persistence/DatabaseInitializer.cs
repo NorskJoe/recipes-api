@@ -26,10 +26,46 @@ namespace Infrastructure.Persistence
                 cancellationToken
             );
 
-            // TODO: locate the .sql files under Persistence/Migrations, read each one,
-            //       and execute in filename order:
-            //
-            //       await connection.ExecuteAsync(scriptSql);
+            await connection.ExecuteAsync(
+                @"
+                    IF OBJECT_ID(N'dbo.Migrations', N'U') IS NULL BEGIN
+                        CREATE TABLE dbo.Migrations (
+                                ScriptName VARCHAR(50),
+                                ExecutedDate DATETIME DEFAULT SYSUTCDATETIME(),
+                                PRIMARY KEY (ScriptName)
+                                )
+                    END;
+                    "
+            );
+
+            var executedScript = (
+                await connection.QueryAsync<string>("SELECT ScriptName FROM Migrations")
+            ).ToList();
+
+            var migrationFiles = Directory
+                .GetFiles(
+                    Path.Combine(AppContext.BaseDirectory, "Migrations"),
+                    "*.sql"
+                )
+                .OrderBy(f => Path.GetFileName(f));
+
+            foreach (var file in migrationFiles)
+            {
+                var scriptName = Path.GetFileName(file);
+
+                if (executedScript.Contains(scriptName))
+                    continue;
+
+                var scriptContent = File.ReadAllText(file);
+                await connection.ExecuteAsync(scriptContent);
+
+                await connection.ExecuteAsync(
+                    @"
+                        INSERT INTO Migrations (ScriptName) VALUES (@Name)
+                        ",
+                    new { Name = scriptName }
+                );
+            }
         }
     }
 }
