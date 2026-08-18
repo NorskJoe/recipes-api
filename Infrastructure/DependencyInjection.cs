@@ -1,5 +1,7 @@
 using Application.Common.Interfaces;
+using Application.Features.Recipes.Interfaces;
 using Infrastructure.Persistence;
+using Infrastructure.Persistence.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -21,6 +23,8 @@ namespace Infrastructure
 
             services.AddSingleton<IDbConnectionFactory>(
                 _ => new SqlConnectionFactory(connectionString));
+
+            services.AddScoped<IRecipeReadRepository, RecipeReadRepository>();
 
             services.AddScoped<DatabaseInitializer>();
 
