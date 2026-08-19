@@ -1,5 +1,5 @@
 using Application.Common.Interfaces;
-using Application.Features.Recipes.Dtos;
+using Application.Features.Recipes.Dtos.Query;
 using Application.Features.Recipes.Interfaces;
 using Dapper;
 

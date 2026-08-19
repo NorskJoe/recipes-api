@@ -1,4 +1,4 @@
-namespace Application.Features.Recipes.Dtos
+namespace Application.Features.Recipes.Dtos.Query
 {
     public record RecipeInstructionDto
     {

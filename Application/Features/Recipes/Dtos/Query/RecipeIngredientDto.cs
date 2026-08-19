@@ -1,6 +1,6 @@
 using Domain.Entities.Enums;
 
-namespace Application.Features.Recipes.Dtos
+namespace Application.Features.Recipes.Dtos.Query
 {
     public record RecipeIngredientDto
     {

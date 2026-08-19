@@ -7,24 +7,25 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Infrastructure
 {
-    /// <summary>
-    /// Registers Infrastructure-layer services (Dapper connection factory,
-    /// database initializer). Called from Presentation/Program.cs.
-    /// </summary>
     public static class DependencyInjection
     {
         public static IServiceCollection AddInfrastructure(
             this IServiceCollection services,
-            IConfiguration configuration)
+            IConfiguration configuration
+        )
         {
-            var connectionString = configuration.GetConnectionString("DefaultConnection")
+            var connectionString =
+                configuration.GetConnectionString("DefaultConnection")
                 ?? throw new InvalidOperationException(
-                    "Connection string 'DefaultConnection' not found.");
+                    "Connection string 'DefaultConnection' not found."
+                );
 
-            services.AddSingleton<IDbConnectionFactory>(
-                _ => new SqlConnectionFactory(connectionString));
+            services.AddSingleton<IDbConnectionFactory>(_ => new SqlConnectionFactory(
+                connectionString
+            ));
 
             services.AddScoped<IRecipeReadRepository, RecipeReadRepository>();
+            services.AddScoped<IRecipeWriteRepository, RecipeWriteRepository>();
 
             services.AddScoped<DatabaseInitializer>();
 

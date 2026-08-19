@@ -1,4 +1,4 @@
-using Application.Features.Recipes.Dtos;
+using Application.Features.Recipes.Dtos.Query;
 
 namespace Application.Features.Recipes.Interfaces
 {

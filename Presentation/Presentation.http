@@ -1,6 +1,34 @@
 @Presentation_HostAddress = http://localhost:5151
+@slug = chocolate-chop-cookies
 
-GET {{Presentation_HostAddress}}/weatherforecast/
+POST {{Presentation_HostAddress}}/recipe
+Content-Type: application/json
+
+{
+  "title": "Chocolate Chip Cookies",
+  "slug": "{{slug}}",
+  "description": "Classic chewy cookies",
+  "servings": 24,
+  "prepTimeInMinutes": 15,
+  "cookTimeInMinutes": 12,
+  "createdBy": "http-test",
+  "ingredients": [
+    { "name": "Flour", "quantity": 300, "measurementType": 1 },
+    { "name": "Sugar", "quantity": 200, "measurementType": 1 },
+    { "name": "Butter", "quantity": 150, "measurementType": 1 },
+    { "name": "Eggs", "quantity": 2, "measurementType": 0 }
+  ],
+  "instructions": [
+    { "stepNumber": 1, "text": "Cream butter and sugar." },
+    { "stepNumber": 2, "text": "Mix in eggs, then flour." },
+    { "stepNumber": 3, "text": "Bake at 180C for 12 minutes." }
+  ],
+  "tags": [ "dessert", "baking" ]
+}
+
+###
+
+GET {{Presentation_HostAddress}}/recipe/{{slug}}
 Accept: application/json
 
 ###

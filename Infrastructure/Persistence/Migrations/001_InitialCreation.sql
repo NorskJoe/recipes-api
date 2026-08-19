@@ -2,7 +2,6 @@
 IF OBJECT_ID (N'dbo.Recipe', N'U') IS NULL BEGIN
 CREATE TABLE dbo.Recipe (
   Id INT NOT NULL IDENTITY(1,1),
-  Title VARCHAR(50) NOT NULL,
   Description VARCHAR(100),
   Servings INT,
   PrepTimeInMinutes INT,
