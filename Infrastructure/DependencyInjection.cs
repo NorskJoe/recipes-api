@@ -24,8 +24,7 @@ namespace Infrastructure
                 connectionString
             ));
 
-            services.AddScoped<IRecipeReadRepository, RecipeReadRepository>();
-            services.AddScoped<IRecipeWriteRepository, RecipeWriteRepository>();
+            services.AddScoped<IRecipeRepository, RecipeRepository>();
 
             services.AddScoped<DatabaseInitializer>();
 

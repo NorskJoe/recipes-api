@@ -8,11 +8,11 @@ namespace Application.Features.Recipes.Queries.GetRecipeBySlug
     public class GetRecipeBySlugQueryHandler
         : IRequestHandler<GetRecipeBySlugQuery, Response<RecipeDto>>
     {
-        private readonly IRecipeReadRepository _recipes;
+        private readonly IRecipeRepository _recipeDb;
 
-        public GetRecipeBySlugQueryHandler(IRecipeReadRepository recipes)
+        public GetRecipeBySlugQueryHandler(IRecipeRepository recipes)
         {
-            _recipes = recipes;
+            _recipeDb = recipes;
         }
 
         public async Task<Response<RecipeDto>> Handle(
@@ -20,8 +20,7 @@ namespace Application.Features.Recipes.Queries.GetRecipeBySlug
             CancellationToken cancellationToken
         )
         {
-            var recipe = await _recipes.GetBySlugAsync(request.Slug, cancellationToken);
-
+            var recipe = await _recipeDb.GetBySlugAsync(request.Slug, cancellationToken);
 
             var response = new Response<RecipeDto>(recipe);
             if (recipe is null)

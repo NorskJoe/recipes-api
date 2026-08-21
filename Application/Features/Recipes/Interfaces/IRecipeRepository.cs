@@ -1,11 +1,13 @@
 using Application.Features.Recipes.Commands.CreateRecipe;
+using Application.Features.Recipes.Dtos.Query;
 
 namespace Application.Features.Recipes.Interfaces
 {
-    public interface IRecipeWriteRepository
+    public interface IRecipeRepository
     {
+        Task<RecipeDto?> GetBySlugAsync(string slug, CancellationToken cancellationToken);
         Task<string> CreateRecipeAsync(
-            CreateRecipeCommand recipe,
+            CreateRecipeCommand command,
             CancellationToken cancellationToken
         );
     }

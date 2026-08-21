@@ -6,11 +6,11 @@ namespace Application.Features.Recipes.Commands.CreateRecipe
 {
     public class CreateRecipeCommandHandler : IRequestHandler<CreateRecipeCommand, Response<string>>
     {
-        private readonly IRecipeWriteRepository _recipes;
+        private readonly IRecipeRepository _recipeDb;
 
-        public CreateRecipeCommandHandler(IRecipeWriteRepository recipes)
+        public CreateRecipeCommandHandler(IRecipeRepository recipes)
         {
-            _recipes = recipes;
+            _recipeDb = recipes;
         }
 
         public async Task<Response<string>> Handle(
@@ -24,7 +24,7 @@ namespace Application.Features.Recipes.Commands.CreateRecipe
                 // TODO: check if slug already exists before continuing
             }
 
-            var slug = await _recipes.CreateRecipeAsync(request, cancellationToken);
+            var slug = await _recipeDb.CreateRecipeAsync(request, cancellationToken);
             response.Value = slug;
             // TODO: Better error handling from the implementation that is captured here
             if (slug is null)
