@@ -17,7 +17,9 @@ namespace Infrastructure.Persistence
             _connectionString = connectionString;
         }
 
-        public async Task<IDbConnection> CreateOpenConnectionAsync(CancellationToken cancellationToken = default)
+        public async Task<IDbConnection> CreateOpenConnectionAsync(
+            CancellationToken cancellationToken = default
+        )
         {
             var connection = new SqlConnection(_connectionString);
             await connection.OpenAsync(cancellationToken);

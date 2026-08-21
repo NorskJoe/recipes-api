@@ -43,10 +43,7 @@ namespace Infrastructure.Persistence
             ).ToList();
 
             var migrationFiles = Directory
-                .GetFiles(
-                    Path.Combine(AppContext.BaseDirectory, "Migrations"),
-                    "*.sql"
-                )
+                .GetFiles(Path.Combine(AppContext.BaseDirectory, "Migrations"), "*.sql")
                 .OrderBy(f => Path.GetFileName(f));
 
             foreach (var file in migrationFiles)

@@ -1,4 +1,5 @@
 using Application.Features.Recipes.Commands.CreateRecipe;
+using Application.Features.Recipes.Commands.DeleteRecipe;
 using Application.Features.Recipes.Queries.GetRecipeBySlug;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -26,5 +27,11 @@ public class RecipeController : ControllerBase
     public async Task<IActionResult> Post(CreateRecipeCommand command)
     {
         return Ok(await _mediator.Send(command));
+    }
+
+    [HttpDelete("{slug}")]
+    public async Task<IActionResult> Delete(string slug)
+    {
+        return Ok(await _mediator.Send(new DeleteRecipeBySlugCommand { Slug = slug }));
     }
 }

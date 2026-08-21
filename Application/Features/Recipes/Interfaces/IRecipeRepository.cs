@@ -10,5 +10,6 @@ namespace Application.Features.Recipes.Interfaces
             CreateRecipeCommand command,
             CancellationToken cancellationToken
         );
+        Task DeleteRecipeBySlugAsync(string slug, CancellationToken cancellationToken);
     }
 }

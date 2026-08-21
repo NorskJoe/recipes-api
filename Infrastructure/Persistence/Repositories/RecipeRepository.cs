@@ -1,5 +1,5 @@
-using System.Diagnostics.Metrics;
 using Application.Common.Interfaces;
+using Application.Common.Wrappers;
 using Application.Features.Recipes.Commands.CreateRecipe;
 using Application.Features.Recipes.Dtos.Query;
 using Application.Features.Recipes.Interfaces;
@@ -159,6 +159,46 @@ namespace Infrastructure.Persistence.Repositories
             tx.Commit();
 
             return command.Slug;
+        }
+
+        public async Task DeleteRecipeBySlugAsync(string slug, CancellationToken cancellationToken)
+        {
+            using var connection = await _connectionFactory.CreateOpenConnectionAsync(
+                cancellationToken
+            );
+            using var tx = connection.BeginTransaction();
+
+            // 1. Delete recipe
+            const string deleteRecipeSql =
+                @"
+                DELETE FROM Recipe
+                WHERE Slug = @Slug;
+            ";
+            await connection.ExecuteAsync(deleteRecipeSql, new { Slug = slug }, tx);
+
+            // 2. Delete orphaned ingredient names
+            const string deleteIngredientsSql =
+                @"
+                    DELETE i
+                    FROM Ingredient i
+                    LEFT JOIN RecipeIngredient ri ON i.Id = ri.IngredientId
+                    WHERE ri.Id IS NULL;
+                ";
+
+            await connection.ExecuteAsync(deleteIngredientsSql, transaction: tx);
+
+            // 3. Delete orphaned tag names
+            const string deleteTagsSql =
+                @"
+                    DELETE t
+                    FROM Tag t
+                    LEFT JOIN RecipeTag rt ON t.Id = rt.TagId
+                    WHERE rt.Id IS NULL;
+                ";
+            await connection.ExecuteAsync(deleteTagsSql, transaction: tx);
+
+            tx.Commit();
+            return;
         }
 
         public async Task<RecipeDto?> GetBySlugAsync(

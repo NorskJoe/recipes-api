@@ -32,3 +32,6 @@ GET {{Presentation_HostAddress}}/recipe/{{slug}}
 Accept: application/json
 
 ###
+
+DELETE {{Presentation_HostAddress}}/recipe/{{slug}}
+Content-Type: application/json
